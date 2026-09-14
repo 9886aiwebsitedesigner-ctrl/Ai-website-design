@@ -1,0 +1,6 @@
+{
+  "name": "Junko Hair Studio",
+  "description": "High-end editorial hair studio in Buckhead, Atlanta specializing in Japanese Thermal Reconditioning, Digital Perms, Master Cuts, and Bespoke Color since 1991.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
