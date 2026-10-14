@@ -16,12 +16,14 @@ import { HairConsultationAdvisor } from './components/HairConsultationAdvisor';
 import { InteractiveBookingModal } from './components/InteractiveBookingModal';
 import { TestimonialsAndAwards } from './components/TestimonialsAndAwards';
 import { StudioLocationFooter } from './components/StudioLocationFooter';
+import { AdminPortalModal } from './components/AdminPortalModal';
 
 export default function App() {
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [selectedServiceId, setSelectedServiceId] = useState<string | undefined>(undefined);
   const [selectedStylistId, setSelectedStylistId] = useState<string | undefined>(undefined);
   const [quizModalOpen, setQuizModalOpen] = useState(false);
+  const [adminPortalOpen, setAdminPortalOpen] = useState(false);
 
   const handleOpenBooking = (serviceId?: string, stylistId?: string) => {
     setSelectedServiceId(serviceId);
@@ -110,10 +112,11 @@ export default function App() {
         <TestimonialsAndAwards />
       </main>
 
-      {/* Location, Hours & Footer */}
+      {/* Location, Hours & Footer - Contains Admin Portal Access */}
       <StudioLocationFooter 
         onOpenBooking={() => handleOpenBooking()}
         onOpenQuiz={handleOpenQuiz}
+        onOpenAdminPortal={() => setAdminPortalOpen(true)}
       />
 
       {/* Modals */}
@@ -128,6 +131,12 @@ export default function App() {
         isOpen={quizModalOpen}
         onClose={() => setQuizModalOpen(false)}
         onSelectRecommendedService={handleQuizRecommendation}
+      />
+
+      {/* Admin Panel & Bookings Hub */}
+      <AdminPortalModal
+        isOpen={adminPortalOpen}
+        onClose={() => setAdminPortalOpen(false)}
       />
     </div>
   );

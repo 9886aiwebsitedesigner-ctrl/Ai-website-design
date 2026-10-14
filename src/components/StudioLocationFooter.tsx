@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, Send, Navigation, ShieldCheck, Heart, ShoppingBag, Sparkles, ExternalLink, PackageCheck } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { MapPin, Phone, Mail, Clock, Send, Navigation, ShieldCheck, Heart, ShoppingBag, Sparkles, ExternalLink, PackageCheck, Lock } from 'lucide-react';
 import { SALON_DETAILS } from '../data/salonData';
 import { SocialIcons } from './SocialIcons';
+import { checkAdminAccountExists } from '../lib/supabase';
 
 interface FooterProps {
   onOpenBooking: () => void;
   onOpenQuiz: () => void;
+  onOpenAdminPortal: () => void;
 }
 
-export const StudioLocationFooter: React.FC<FooterProps> = ({ onOpenBooking, onOpenQuiz }) => {
+export const StudioLocationFooter: React.FC<FooterProps> = ({ onOpenBooking, onOpenQuiz, onOpenAdminPortal }) => {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [slotClaimed, setSlotClaimed] = useState(false);
+
+  useEffect(() => {
+    checkAdminAccountExists().then(res => setSlotClaimed(res.exists));
+  }, []);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -265,6 +272,15 @@ export const StudioLocationFooter: React.FC<FooterProps> = ({ onOpenBooking, onO
               <span>Shop Store</span>
               <ExternalLink className="w-2.5 h-2.5" />
             </a>
+            <button
+              id="footer-admin-portal-btn"
+              onClick={onOpenAdminPortal}
+              className="inline-flex items-center gap-1.5 text-[#C5A880] font-medium hover:text-[#F3EFEA] bg-[#C5A880]/10 hover:bg-[#C5A880]/20 px-3 py-1 rounded-full border border-[#C5A880]/35 transition-colors cursor-pointer"
+              title="Salon Administrator Portal"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-[#C5A880]" />
+              <span>{slotClaimed ? 'Admin Login' : 'Admin Sign-up / Login'}</span>
+            </button>
           </div>
 
           <div className="text-[11px]">

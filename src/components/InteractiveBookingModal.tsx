@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   X, Calendar, Clock, User, Check, Sparkles, Phone, Mail, 
-  Scissors, ShieldCheck, ChevronRight, ChevronLeft, Download, CheckCircle2 
+  Scissors, ShieldCheck, ChevronRight, ChevronLeft, Download, CheckCircle2,
+  Database, AlertTriangle, Copy, ExternalLink, Loader2 
 } from 'lucide-react';
 import { SERVICES_DATA, STYLISTS_DATA, SALON_DETAILS } from '../data/salonData';
+import { saveAppointmentBooking, AppointmentRecord, SUPABASE_SQL_SETUP, SUPABASE_PROJECT_ID } from '../lib/supabase';
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -35,6 +37,16 @@ export const InteractiveBookingModal: React.FC<BookingModalProps> = ({
   const [clientNotes, setClientNotes] = useState('');
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [confirmationCode, setConfirmationCode] = useState('');
+
+  // Supabase submission state
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [supabaseSyncResult, setSupabaseSyncResult] = useState<{
+    attempted: boolean;
+    synced: boolean;
+    tableMissing?: boolean;
+    error?: string;
+  }>({ attempted: false, synced: false });
+  const [copiedSql, setCopiedSql] = useState(false);
 
   useEffect(() => {
     if (preSelectedServiceId) setSelectedServiceId(preSelectedServiceId);
@@ -102,14 +114,46 @@ export const InteractiveBookingModal: React.FC<BookingModalProps> = ({
     }
   };
 
-  const handleCompleteBooking = (e: React.FormEvent) => {
+  const handleCompleteBooking = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!clientName || !clientEmail || !clientPhone) {
       alert('Please fill in your name, email, and phone number.');
       return;
     }
+
+    setIsSubmitting(true);
     const code = `JNK-${Math.floor(100000 + Math.random() * 900000)}`;
     setConfirmationCode(code);
+
+    const bookingPayload: AppointmentRecord = {
+      confirmation_code: code,
+      client_name: clientName,
+      client_email: clientEmail,
+      client_phone: clientPhone,
+      service_id: selectedServiceId,
+      service_name: currentService.name,
+      stylist_id: selectedStylistId,
+      stylist_name: currentStylist ? currentStylist.name : 'Any Available Specialist',
+      appointment_date: selectedDate,
+      time_slot: selectedTimeSlot,
+      hair_length: hairLength,
+      chemical_history: chemicalHistory,
+      add_ons: addOns,
+      estimated_price: calculateTotalEstimate(),
+      notes: clientNotes,
+      status: 'confirmed'
+    };
+
+    // Save directly to Supabase backend table 'appointments'
+    const res = await saveAppointmentBooking(bookingPayload);
+    setSupabaseSyncResult({
+      attempted: true,
+      synced: res.success,
+      tableMissing: res.tableMissing,
+      error: res.error
+    });
+
+    setIsSubmitting(false);
     setIsConfirmed(true);
   };
 
@@ -207,6 +251,70 @@ END:VCALENDAR`;
                 Location: 2391 Peachtree Rd NE, Suite B3D, Atlanta, GA 30305
               </div>
             </div>
+
+            {/* Supabase Realtime Sync Feedback Card */}
+            {supabaseSyncResult.attempted && (
+              <div className="max-w-md mx-auto">
+                {supabaseSyncResult.synced ? (
+                  <div className="bg-[#15241C] border border-[#2D5A3E] rounded-sm p-3.5 text-left text-xs flex items-center gap-3 shadow-lg">
+                    <div className="w-8 h-8 rounded-full bg-[#3ECF8E]/20 text-[#3ECF8E] flex items-center justify-center shrink-0">
+                      <Database className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-semibold text-xs text-[#3ECF8E]">Saved to Supabase Backend</span>
+                        <span className="text-[10px] bg-[#3ECF8E]/20 text-[#3ECF8E] px-1.5 py-0.2 rounded font-mono">201 OK</span>
+                      </div>
+                      <span className="text-[11px] text-[#9FD8B5] block mt-0.5">
+                        Record secured in table <code className="text-[#F3EFEA] bg-[#0E1A13] px-1 py-0.5 rounded font-mono">appointments</code> in project {SUPABASE_PROJECT_ID}
+                      </span>
+                    </div>
+                  </div>
+                ) : supabaseSyncResult.tableMissing ? (
+                  <div className="bg-[#241F18] border border-[#524126] rounded-sm p-3.5 text-left text-xs space-y-2.5 shadow-lg">
+                    <div className="flex items-start gap-2.5">
+                      <AlertTriangle className="w-4 h-4 text-[#E5A855] shrink-0 mt-0.5" />
+                      <div>
+                        <span className="font-semibold text-xs text-[#E5A855] block">
+                          Supabase Project Connected • Action Needed: Run SQL Table Setup
+                        </span>
+                        <p className="text-[11px] text-[#D8CBBA] mt-0.5 leading-relaxed">
+                          Your appointment details have been captured and queued. To have incoming submissions automatically persist in your Supabase database table, run the 1-click SQL script in your Supabase dashboard.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between gap-2 pt-2 border-t border-[#3D3323]">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          navigator.clipboard.writeText(SUPABASE_SQL_SETUP);
+                          setCopiedSql(true);
+                          setTimeout(() => setCopiedSql(false), 3000);
+                        }}
+                        className="px-2.5 py-1.5 bg-[#C5A880] hover:bg-[#D5BCA0] text-[#121110] text-[10px] font-semibold uppercase tracking-wider rounded-sm flex items-center gap-1.5 cursor-pointer shadow"
+                      >
+                        {copiedSql ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                        <span>{copiedSql ? 'SQL Script Copied!' : 'Copy SQL Table Script'}</span>
+                      </button>
+                      <a
+                        href={`https://supabase.com/dashboard/project/${SUPABASE_PROJECT_ID}/sql/new`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[10px] text-[#C5A880] hover:text-[#F3EFEA] flex items-center gap-1"
+                      >
+                        <span>Open SQL Editor</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="bg-[#261B1B] border border-[#4D2626] rounded-sm p-3 text-left text-xs text-[#E59999]">
+                    <span className="font-semibold block text-[11px]">Supabase Notice: {supabaseSyncResult.error}</span>
+                    <span className="text-[10px] text-[#C59B9B]">Your reservation request is preserved on screen.</span>
+                  </div>
+                )}
+              </div>
+            )}
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
               <button
@@ -531,9 +639,17 @@ END:VCALENDAR`;
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 bg-[#C5A880] hover:bg-[#D5BCA0] text-[#121110] text-xs uppercase tracking-widest font-semibold rounded-sm transition-all shadow-lg cursor-pointer mt-2"
+                  disabled={isSubmitting}
+                  className="w-full py-3.5 bg-[#C5A880] hover:bg-[#D5BCA0] text-[#121110] text-xs uppercase tracking-widest font-semibold rounded-sm transition-all shadow-lg cursor-pointer mt-2 disabled:opacity-75 disabled:cursor-wait flex items-center justify-center gap-2"
                 >
-                  Confirm & Reserve Appointment
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-[#121110]" />
+                      <span>Saving Reservation to Supabase...</span>
+                    </>
+                  ) : (
+                    <span>Confirm & Reserve Appointment</span>
+                  )}
                 </button>
               </form>
             )}
