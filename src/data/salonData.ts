@@ -24,6 +24,7 @@ export const SALON_DETAILS = {
   email: "concierge@junkohair.com",
   instagram: "@junkohairstudio",
   shopUrl: "https://shop.saloninteractive.com/store/junko-hair-studio-95652",
+  mapUrl: "https://maps.google.com/?q=2391+Peachtree+Rd+NE+Suite+B3D%2C+Atlanta%2C+GA+30305",
   hours: [
     { day: "Tuesday – Friday", time: "10:00 AM – 7:00 PM" },
     { day: "Saturday", time: "9:00 AM – 6:00 PM" },

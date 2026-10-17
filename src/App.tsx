@@ -15,6 +15,7 @@ import { LookbookSection } from './components/LookbookSection';
 import { HairConsultationAdvisor } from './components/HairConsultationAdvisor';
 import { InteractiveBookingModal } from './components/InteractiveBookingModal';
 import { TestimonialsAndAwards } from './components/TestimonialsAndAwards';
+import { ClientGoogleReviews } from './components/ClientGoogleReviews';
 import { StudioLocationFooter } from './components/StudioLocationFooter';
 import { AdminPortalModal } from './components/AdminPortalModal';
 
@@ -110,6 +111,9 @@ export default function App() {
 
         {/* Awards, Testimonials & FAQs */}
         <TestimonialsAndAwards />
+
+        {/* Live Client Google Reviews Widget */}
+        <ClientGoogleReviews />
       </main>
 
       {/* Location, Hours & Footer - Contains Admin Portal Access */}

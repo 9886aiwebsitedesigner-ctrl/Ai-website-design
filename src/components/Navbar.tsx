@@ -28,6 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenConsultatio
     { name: 'Lookbook', href: '#lookbook' },
     { name: 'Master Stylists', href: '#stylists' },
     { name: 'Heritage', href: '#heritage' },
+    { name: 'Reviews', href: '#client-reviews' },
     { name: 'Location & Hours', href: '#location' }
   ];
 
