@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Sparkles, Calendar, ArrowRight, Award, ShieldCheck, Star } from 'lucide-react';
 import { SALON_DETAILS } from '../data/salonData';
+import heroHairImg from '../assets/images/junko_hero_hair_1788320326641.jpg';
 
 interface HeroSectionProps {
   onOpenBooking: () => void;
@@ -95,10 +96,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking, onOpenQ
             {/* Outer luxury border card */}
             <div className="relative rounded-lg overflow-hidden border border-[#3E3A34] bg-[#181614] shadow-2xl gold-glow group">
               <img
-                src="/src/assets/images/junko_hero_hair_1788320326641.jpg"
+                src={heroHairImg}
                 alt="Junko Hair Studio - Japanese Thermal Reconditioning High Fashion Editorial"
                 className="w-full h-[460px] sm:h-[540px] object-cover object-center brightness-95 group-hover:scale-105 transition-transform duration-700 ease-out"
-                referrerPolicy="no-referrer"
               />
               
               {/* Subtle gradient overlay */}

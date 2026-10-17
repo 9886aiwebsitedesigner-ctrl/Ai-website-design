@@ -1,5 +1,18 @@
 import { ServiceItem, Stylist, LookbookItem, BeforeAfterItem, Testimonial, QuizQuestion } from '../types';
 
+import heroHairImg from '../assets/images/junko_hero_hair_1788320326641.jpg';
+import salonInteriorImg from '../assets/images/junko_salon_interior_1788320344181.jpg';
+import digitalPermImg from '../assets/images/junko_digital_perm_1788320364051.jpg';
+import stylistKaiImg from '../assets/images/kai_stylist_photo_1788324105244.jpg';
+import stylistAhmedImg from '../assets/images/ahmed_stylist_photo_1788324898964.jpg';
+import stylistDavidImg from '../assets/images/david_exact_portrait_1788325374434.jpg';
+import stylistNykeriaImg from '../assets/images/stylist_nykeria_1788323468621.jpg';
+import stylistJessicaImg from '../assets/images/stylist_jessica_1788323482726.jpg';
+import stylistAkemiImg from '../assets/images/stylist_akemi_1788323498691.jpg';
+import stylistBrielleImg from '../assets/images/stylist_brielle_1788323514860.jpg';
+import stylistSoungYounImg from '../assets/images/stylist_soung_youn_1788323526384.jpg';
+import stylistLoriImg from '../assets/images/stylist_lori_1788323543749.jpg';
+
 export const SALON_DETAILS = {
   name: "Junko Hair Studio",
   tagline: "Japanese Hair Artistry & Texture Mastery Since 1991",
@@ -42,7 +55,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     recommendedStylists: ["Kai", "Akemi", "Ahmed", "David"],
     requiresConsultation: true,
     tag: "Signature Specialty",
-    image: "/src/assets/images/junko_hero_hair_1788320326641.jpg"
+    image: heroHairImg
   },
   {
     id: "jtr-retouch",
@@ -75,7 +88,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     ],
     recommendedStylists: ["Kai", "Akemi", "Soung Youn"],
     tag: "High Demand",
-    image: "/src/assets/images/junko_digital_perm_1788320364051.jpg"
+    image: digitalPermImg
   },
   {
     id: "japanese-head-spa",
@@ -215,7 +228,7 @@ export const STYLISTS_DATA: Stylist[] = [
     licenses: ["Cosmetology License (USA)", "Cosmetology License (Japan)", "Yamano Beauty School (Tokyo)"],
     bio: "Kai is the Assistant Manager at Junko Hair Studio. She graduated from Yamano Beauty School in Tokyo, Japan and holds a cosmetology license in both the U.S. and Japan. She specializes in cuts, color, and styling, with a deep focus on Japanese Thermal Reconditioning (JTR), Digital Perms, and other chemical services.",
     specialties: ["Japanese Thermal Reconditioning (JTR)", "Digital Perms", "Cuts & Styling", "Chemical Retexturizing"],
-    image: "/src/assets/images/kai_stylist_photo_1788324105244.jpg",
+    image: stylistKaiImg,
     availableDays: ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
     quote: "Chemical retexturizing is pure science — when calibrated precisely, hair gains unprecedented vitality."
   },
@@ -227,7 +240,7 @@ export const STYLISTS_DATA: Stylist[] = [
     licenses: ["Salon Manager", "Master Cosmetologist (GA)", "30+ Years Mastery"],
     bio: "Ahmed is the salon Manager at Junko Hair Studio and has been crafting hairstyles for his clients for more than 30 years. He is passionate about his work and takes pride in tailoring every look to the individual.",
     specialties: ["Tailored Styling", "Precision Cuts", "JTR Straightening", "Traditional Perms"],
-    image: "/src/assets/images/ahmed_stylist_photo_1788324898964.jpg",
+    image: stylistAhmedImg,
     availableDays: ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
     quote: "A great haircut should fall effortlessly into place and celebrate each client's unique individuality."
   },
@@ -239,7 +252,7 @@ export const STYLISTS_DATA: Stylist[] = [
     licenses: ["Empire Beauty School Graduate", "Licensed Cosmetologist (GA)"],
     bio: "David is a graduate of Empire Beauty School and brings a well-rounded approach to every client. He specializes in highlights, styling, natural hair, and extensions, and is known for his attention to detail and precision.",
     specialties: ["Dimensional Highlights", "Extensions & Styling", "Natural Hair Care", "JTR Straightening"],
-    image: "/src/assets/images/david_exact_portrait_1788325374434.jpg",
+    image: stylistDavidImg,
     availableDays: ["Tuesday", "Wednesday", "Thursday", "Friday"],
     quote: "Precision and meticulous attention to detail turn everyday hair into a confidence statement."
   },
@@ -251,7 +264,7 @@ export const STYLISTS_DATA: Stylist[] = [
     licenses: ["Empire Beauty School (2004)", "Toni & Guy Certified", "Aveda & Dass Trained"],
     bio: "Nykeria graduated from Empire Beauty School in 2004 and went on to train with industry leaders including Toni & Guy, Aveda Salon & Spa, and Dass Salon & Spa. With more than 20 years of experience, she excels in cuts, perms, and natural hair.",
     specialties: ["Precision Haircuts", "Natural Hair Textures", "Perms & Body Waves", "Balayage"],
-    image: "/src/assets/images/stylist_nykeria_1788323468621.jpg",
+    image: stylistNykeriaImg,
     availableDays: ["Tuesday", "Wednesday", "Friday", "Saturday"],
     quote: "Understanding natural hair texture and geometry is the key to effortless everyday elegance."
   },
@@ -263,7 +276,7 @@ export const STYLISTS_DATA: Stylist[] = [
     licenses: ["Paul Mitchell Academy (Atlanta)", "Licensed Cosmetologist (GA)"],
     bio: "Jessica graduated from Paul Mitchell Academy in Atlanta. She specializes in cuts and color, with a particular focus on blonde hair, and takes pride in bringing each client's vision to life.",
     specialties: ["Blonde Transformations", "Color Formulations", "Custom Precision Cuts", "Balayage"],
-    image: "/src/assets/images/stylist_jessica_1788323482726.jpg",
+    image: stylistJessicaImg,
     availableDays: ["Wednesday", "Thursday", "Friday", "Saturday"],
     quote: "I take pride in listening closely to bring each client's dream aesthetic into vibrant reality."
   },
@@ -275,7 +288,7 @@ export const STYLISTS_DATA: Stylist[] = [
     licenses: ["Cosmetology License (USA)", "Cosmetology License (Japan)", "Keratin Complex Certified"],
     bio: "With more than 30 years of experience, Akemi specializes in Japanese Thermal Reconditioning, Digital Perms, and Keratin Complex Treatments, with a deep expertise in Asian hair. She holds a cosmetology license in both the U.S. and Japan.",
     specialties: ["Japanese Thermal Reconditioning", "Digital Perms", "Asian Hair Expertise", "Keratin Complex Treatments"],
-    image: "/src/assets/images/stylist_akemi_1788323498691.jpg",
+    image: stylistAkemiImg,
     availableDays: ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
     quote: "Decades of Japanese technique ensure the structural health and silkiness of every strand."
   },
@@ -287,7 +300,7 @@ export const STYLISTS_DATA: Stylist[] = [
     licenses: ["Vidal Sassoon NYC (1991)", "Toni & Guy Cutting Specialist", "Jacques Dessange Balayage"],
     bio: "Brielle has more than 30 years of experience in hairdressing and began her career studying at Vidal Sassoon in New York City in 1991. She worked as a cutting specialist and colorist at Toni & Guy, and has trained in the Jacques Dessange Balayage system for low-maintenance color. She believes a great client experience is just as important as a great technical result.",
     specialties: ["Jacques Dessange Balayage", "Low-Maintenance Color", "Vidal Sassoon Cutting", "Color Formulations"],
-    image: "/src/assets/images/stylist_brielle_1788323514860.jpg",
+    image: stylistBrielleImg,
     availableDays: ["Tuesday", "Thursday", "Friday", "Saturday"],
     quote: "A great client experience is just as important as a flawless, enduring technical result."
   },
@@ -299,7 +312,7 @@ export const STYLISTS_DATA: Stylist[] = [
     licenses: ["Bennett Dugo French Trained", "Former Salon Owner (20 Yrs)", "Master Cosmetologist (GA)"],
     bio: "Soung Youn brings more than 20 years of expertise in precision cutting and color. Her career includes training under a renowned French stylist at Bennett Dugo Salon, an earlier tenure at Junko Hair Studio, and two decades owning her own salon. She specializes in Korean-style cuts, soft layers, and dimensional color, including balayage and highlights.",
     specialties: ["Korean-Style Cuts", "Soft Feathered Layers", "Dimensional Balayage & Highlights", "Traditional Perms"],
-    image: "/src/assets/images/stylist_soung_youn_1788323526384.jpg",
+    image: stylistSoungYounImg,
     availableDays: ["Wednesday", "Thursday", "Friday", "Saturday"],
     quote: "Softness, movement, and light reflection define modern luxury hair."
   },
@@ -311,7 +324,7 @@ export const STYLISTS_DATA: Stylist[] = [
     licenses: ["Licensed Cosmetologist (GA)", "Mexico City & USA Trained"],
     bio: "Lori is a licensed cosmetologist with 15 years of experience. Born in Mexico City, she discovered her passion for hairdressing as a teenager and trained in Mexico before continuing her education in the U.S. She specializes in creating dimension through highlights, lowlights, and balayage.",
     specialties: ["Dimensional Highlights", "Lowlights", "Seamless Balayage", "Tone Blending"],
-    image: "/src/assets/images/stylist_lori_1788323543749.jpg",
+    image: stylistLoriImg,
     availableDays: ["Tuesday", "Wednesday", "Friday", "Saturday"],
     quote: "Creating rich dimension and illumination brings hair alive with depth and warmth."
   }
@@ -323,7 +336,7 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     title: "Liquid Obsidian Glass Hair",
     subtitle: "Japanese Thermal Reconditioning (YUKO)",
     category: "Straightening",
-    image: "/src/assets/images/junko_hero_hair_1788320326641.jpg",
+    image: heroHairImg,
     stylist: "Kai",
     hairType: "Naturally coarse, frizzy 3A wave",
     servicesUsed: ["JTR Full System", "Milbon Gloss Treatment"],
@@ -334,7 +347,7 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     title: "Bespoke Digital Air Wave",
     subtitle: "Japanese Ceramic Digital Perm",
     category: "Perms",
-    image: "/src/assets/images/junko_digital_perm_1788320364051.jpg",
+    image: digitalPermImg,
     stylist: "Kai",
     hairType: "Fine, pin-straight Asian hair",
     servicesUsed: ["Digital Air Wave Perm", "Face Framing Cut"],
@@ -356,7 +369,7 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     title: "Architectural Textured Blunt Bob",
     subtitle: "Japanese Wet & Dry Precision Slide Cut",
     category: "Cuts",
-    image: "https://images.unsplash.com/photo-1584297091622-af8e5fd6331f?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=1200&q=80",
     stylist: "Ahmed",
     hairType: "Medium density straight hair",
     servicesUsed: ["Master Precision Cut", "Milbon Hydration Seal"],
@@ -367,7 +380,7 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     title: "Seoul Feathered Butterfly Layers",
     subtitle: "Curtain Bangs & Soft Cascade",
     category: "Cuts",
-    image: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=1200&q=80",
     stylist: "Soung Youn",
     hairType: "Long heavy hair needing lift",
     servicesUsed: ["Korean Layering", "Signature Blowout"],
@@ -395,7 +408,7 @@ export const BEFORE_AFTER_ITEMS: BeforeAfterItem[] = [
     timeTaken: "3.5 Hours",
     hairStory: "Client struggled with daily 45-minute flat-iron routines and immediate humidity frizz. After JTR, her hair dries pin-straight and glossy without any heat tools.",
     beforeImage: "https://images.unsplash.com/photo-1589710751893-f9a6770ad71b?auto=format&fit=crop&w=800&q=80",
-    afterImage: "/src/assets/images/junko_hero_hair_1788320326641.jpg",
+    afterImage: heroHairImg,
     keyBenefits: [
       "100% Humidity resistant",
       "Cut morning routine from 45 min to 0 min",
@@ -410,7 +423,7 @@ export const BEFORE_AFTER_ITEMS: BeforeAfterItem[] = [
     timeTaken: "2.5 Hours",
     hairStory: "Client wanted romantic body and movement without hot rollers or curling iron damage. Digital perm created soft, wash-and-wear waves that last 9+ months.",
     beforeImage: "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=800&q=80",
-    afterImage: "/src/assets/images/junko_digital_perm_1788320364051.jpg",
+    afterImage: digitalPermImg,
     keyBenefits: [
       "Lasts 6-9 months",
       "Soft, touchable curl memory",

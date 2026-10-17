@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Sparkles, CheckCircle2, Award, HeartHandshake, Scissors, Droplets } from 'lucide-react';
 import { SALON_DETAILS } from '../data/salonData';
+import salonInteriorImg from '../assets/images/junko_salon_interior_1788320344181.jpg';
 
 export const BrandHeritage: React.FC = () => {
   const pillars = [
@@ -45,10 +46,9 @@ export const BrandHeritage: React.FC = () => {
           >
             <div className="relative rounded-lg overflow-hidden border border-[#3E3A34] bg-[#1A1816] shadow-2xl">
               <img
-                src="/src/assets/images/junko_salon_interior_1788320344181.jpg"
+                src={salonInteriorImg}
                 alt="Junko Hair Studio - Minimalist Japanese Salon Interior in Buckhead Atlanta"
                 className="w-full h-[400px] sm:h-[480px] object-cover"
-                referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#121110]/90 via-[#121110]/30 to-transparent" />
               
